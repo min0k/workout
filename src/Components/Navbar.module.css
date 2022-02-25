@@ -1,0 +1,30 @@
+
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbarItems {
+    list-style: none;
+    text-decoration: none;
+}
+
+.navbarItems:visited {
+    color: black;
+}
+
+.navbarLinks {
+    display: flex;
+    gap: 24px;
+}
+
+.span {
+    color: red;
+    font-size: 54px;
+    position: absolute;
+    top: -12px;
+    transform: rotate(8deg);
+    left: 131px;
+}
