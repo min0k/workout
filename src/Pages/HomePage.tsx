@@ -22,12 +22,7 @@ export default function HomePage() {
   ]);
 
   let navigate = useNavigate();
-  
-  function handleFormInput() {
 
-  }
-
-  //Figure out how to add a new excercise and update state
   function addNewExcercise() {
     setWorkout(prevValue => [
       ...prevValue,
@@ -42,10 +37,24 @@ export default function HomePage() {
     ])
   }
 
-  function handleChange(e: React.ChangeEvent<HTMLSelectElement>, idN: number) {
-    console.log(e);
+  function handleSelectChange(e: React.ChangeEvent<HTMLSelectElement>, idN: number) {
+    // console.log(e);
+    // console.log(idN);
+    setWorkout((prevWorkout) => {
+      return prevWorkout.map(excercise => {
+        return excercise.idNumber === idN ? {...excercise, [e.target.name]: parseInt( e.target.value)} : excercise
+      })
+    })
+  }
+
+  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>, idN: number) {
+    console.log(e.target.value);
     console.log(idN);
-    
+    setWorkout((prevWorkout) => {
+      return prevWorkout.map(excercise => {
+        return excercise.idNumber === idN ? {...excercise, [e.target.name]: e.target.value} : excercise
+      })
+    })
   }
 
 //   const handleUpdateFruits = (id: string) => {
@@ -58,7 +67,7 @@ export default function HomePage() {
 
 
   const Excercises = workout.map((e, idx) => {
-    return <ExcerciseCard key={idx} idNumber={idx} rep_break={e.rep_break} reps={e.reps} length={e.length} excercise={e.excercise} excercise_break={e.excercise_break} handleChange={handleChange}/>
+    return <ExcerciseCard key={idx} idNumber={idx} rep_break={e.rep_break} reps={e.reps} length={e.length} excercise={e.excercise} excercise_break={e.excercise_break} handleSelectChange={handleSelectChange} handleInputChange={handleInputChange}/>
   })
 
 console.log(workout);
