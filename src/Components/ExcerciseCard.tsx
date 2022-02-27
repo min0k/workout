@@ -1,5 +1,5 @@
 interface Props {
-  handleChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleChange: (e: React.ChangeEvent<HTMLSelectElement>, idN:number) => void;
   idNumber: number,
   excercise: string,
   length: number,
@@ -15,7 +15,7 @@ export default function ExcerciseCard(props: Props) {
         <label>What excercise you doing? </label>
         <input name="excercise" type="text" placeholder="pushups" /> <br></br>
         <label>How long are you doing it for? </label>
-        <select name="length" id="temp" defaultValue={props.length} onChange={props.handleChange} >
+        <select name="length" id="temp" defaultValue={props.length} onChange={(event) => props.handleChange(event, props.idNumber)} >
           <option value="15">15 seconds</option>
           <option value="30">30 seconds</option>
           <option value="45">45 seconds</option>

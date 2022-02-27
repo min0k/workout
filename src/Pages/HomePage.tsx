@@ -12,7 +12,7 @@ import IExcercise from "../Interface";
 export default function HomePage() {
   const [workout, setWorkout] = React.useState<IExcercise[]>([
     {
-      idNumber: 1,
+      idNumber: 0,
       excercise: "squats",
       length: 60,
       reps: 3,
@@ -29,29 +29,23 @@ export default function HomePage() {
 
   //Figure out how to add a new excercise and update state
   function addNewExcercise() {
-    // setWorkout(prevValue => [
-    //   ...prevValue,
-    //   {
-    //     key: prevValue.length + 1,
-    //     excercise: "squats",
-    //     length: 60,
-    //     reps: 3,
-    //     rep_break: 20,
-    //     excercise_break: 600
-    //   }
-    // ])
-  }
-
-  function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    console.log(e);
-    
     setWorkout(prevValue => [
       ...prevValue,
       {
-        ...prevValue[0],
-        [e.target.name]: parseInt(e.target.value) 
+        idNumber: prevValue.length,
+        excercise: "squats",
+        length: 60,
+        reps: 3,
+        rep_break: 20,
+        excercise_break: 600
       }
     ])
+  }
+
+  function handleChange(e: React.ChangeEvent<HTMLSelectElement>, idN: number) {
+    console.log(e);
+    console.log(idN);
+    
   }
 
 //   const handleUpdateFruits = (id: string) => {
