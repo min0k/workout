@@ -6,37 +6,12 @@ import { useNavigate } from "react-router";
 
 import ExcerciseCard from "../components/ExcerciseCard";
 import useWorkout from "../hooks/useWorkout";
-import IExcercise from "../Interface";
 
 export default function HomePage() {
   const { workout, handleInputChange, handleSelectChange, addNewExcercise } =
     useWorkout();
 
   let navigate = useNavigate();
-
-  // console.log(workout);
-
-
-  // Figure out how to turn array of objects into one object.
-
-  // function reshapeWorkoutObject(workout: IExcercise[]) {
-  //   let reshaped = {};
-  //   workout.forEach(obj => {
-  //       for (const [key, value] of Object.entries(obj)) {
-  //         reshaped = Object.assign(key, value);
-  //         console.log(`${key}: ${value}`);
-  //     }
-  //   })
-  //   return reshaped;
-  //   {
-      // idNumber: 0,
-      // excercise: "squats",
-      // length: 60,
-      // reps: 3,
-      // rep_break: 20,
-      // excercise_break: 600,
-  //   },
-  // }
 
 function goToHomePage() {
   // const reshapedWorkout = reshapeWorkoutObject(workout);

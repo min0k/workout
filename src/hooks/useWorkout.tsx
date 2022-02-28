@@ -6,10 +6,10 @@ export default function useWorkout() {
     {
       idNumber: 0,
       excercise: "squats",
-      length: 60,
-      reps: 3,
-      rep_break: 20,
-      excercise_break: 600,
+      length: 15,
+      reps: 2,
+      rep_break: 5,
+      excercise_break: 30,
     },
   ]);
 
@@ -19,10 +19,10 @@ export default function useWorkout() {
       {
         idNumber: prevValue.length,
         excercise: "squats",
-        length: 60,
-        reps: 3,
-        rep_break: 20,
-        excercise_break: 600,
+        length: 30,
+        reps: 2,
+        rep_break: 10,
+        excercise_break: 60,
       },
     ]);
   }

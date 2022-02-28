@@ -4,104 +4,79 @@ import React from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStopwatch } from "@fortawesome/free-solid-svg-icons";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate, useNavigationType } from "react-router";
 import IExcercise from "../Interface";
 
 export default function WorkoutPage() {
-  const [timer, setTimer] = React.useState(10);
-  const [currentExcercise, setCurrentExcercise] = React.useState<IExcercise>();
-  const [rep, setRep] = React.useState<Number>();
-  const [excerciseNumber, setExcerciseNumber] = React.useState(0);
-  const [breakTime, setBreakTime] = React.useState<boolean>(false);
-
-
+  const navigate = useNavigate();
   const location = useLocation();
   const state = location.state as IExcercise[];
 
-  // MINO -- Forget everything below, try to 
-  // make one useEffect that'll do most of everything
-  // with dependency on the timer (if/then statements every second);
+  const [excerciseNumber, setExcerciseNumber] = React.useState(0);
+  const [currentExcercise, setCurrentExcercise] = React.useState<IExcercise>(
+    state[excerciseNumber]
+  );
+  const [timer, setTimer] = React.useState(currentExcercise.length);
+  const [breakTime, setBreakTime] = React.useState<boolean>(false);
 
-  // OR learn more about using multiple useEffects cause theres
-  // a gap in knowledge here..
+  React.useEffect(() => {
+    const startTimer = setTimeout(() => {
+      if (timer !== 0) {
+        setTimer((prevValue) => prevValue - 1);
+      } else if (timer === 0 && breakTime === false) {
+        // Decriment rep count, set breaktime to true, set timer to rep_break.
+        const newObj = { ...currentExcercise, reps: currentExcercise.reps - 1 };
+        setCurrentExcercise(newObj);
+        setBreakTime(true);
+        setTimer(currentExcercise.rep_break);
+      } else if (timer === 0 && breakTime) {
+        // Determine if last excercise
+        if (currentExcercise.reps === 0) {
+          if (excerciseNumber + 1 === state.length) {
+            navigate("/workoutdone");
+          } else {
+            setTimer(currentExcercise.excercise_break);
+            setExcerciseNumber((prevValue) => prevValue + 1);
+            setCurrentExcercise(state[excerciseNumber + 1]);
+          }
+        } else {
+          setBreakTime(false);
+          setTimer(currentExcercise.length);
+        }
+      }
+    }, 100);
 
-  //   // Update which excercise we're on and how many reps
-  //   // React.useEffect(() => {
-  //   //   setCurrentExcercise(state[excerciseNumber]);
-  //   //   if (currentExcercise) {
-  //   //     setRep(currentExcercise.reps)
-  //   //   }
-  //   // }, [excerciseNumber]);
+    return () => {
+      clearTimeout(startTimer);
+    };
+  }, [timer]);
 
-  //   // Manage rep number
-  //   React.useEffect(() => {
-
-  //   }, []);
-
-  //   // Setup Timer
-  //   React.useEffect(() => {
-  //     if (currentExcercise) {
-  //       setTimer(currentExcercise.length);
-  //     }
-  //   }, [currentExcercise]);
-
-
-
-  // // Start timer, if timer 0 do stuff
-  // React.useEffect(() => {
-  //   const startTimer = setTimeout(() => {
-  //     if (breakTime) {
-  //       setTimer((prevValue) => prevValue - 1);
-  //     } else {
-  //       setCurrentExcercise(state[excerciseNumber]);
-  //       if (currentExcercise) {
-  //         setRep(currentExcercise.reps);
-  //       }
-  //     }
-
-  //     if (timer === 0) {
-  //       setBreakTime((prevValue) => true);
-  //       if (currentExcercise && breakTime) {
-  //         setTimer(currentExcercise.excercise_break);
-  //       }
-  //       setExcerciseNumber((prevValue) => prevValue + 1);
-  //     } else {
-  //       setTimer((prevValue) => prevValue - 1);
-  //     }
-  //   }, 100);
-  //   return () => {
-  //     clearTimeout(startTimer);
-  //   };
-  // }, [timer]);
-
-
-
-  // //setup breaks
-  // React.useEffect(() => {
-  //   if (currentExcercise && breakTime) {
-  //     setTimer(currentExcercise.excercise_break);
-  //   }
-  // },[breakTime])
-
-
-
-
-
-  console.log(`WorkoutPage`);
+  console.log(state);
   console.log(currentExcercise);
 
   return (
     <div className={styles.pageContainer}>
-      <div className={styles.workoutContainer}>
-        <p>Excercise #{excerciseNumber + 1}</p>
-        <p>Pushups</p>
-        <p>__ second breaks</p>
-        <p>{rep} reps</p>
-      </div>
-      <div className={styles.countdownContainer}>
-        <FontAwesomeIcon className={styles.timerIcon} icon={faStopwatch} />
-        <h2 className={styles.timerText}>{timer}</h2>
-      </div>
+      {breakTime ? (
+        <div className={styles.countdownContainer}>
+          <h1>Break time</h1>
+          <FontAwesomeIcon className={styles.timerIcon} icon={faStopwatch} />
+          <h2 className={styles.timerText}>{timer}</h2>
+        </div>
+      ) : (
+        <div>
+          <div className={styles.workoutContainer}>
+            <p>Excercise {excerciseNumber + 1}</p>
+            <p>{currentExcercise.excercise}</p>
+            <p>{currentExcercise.rep_break} second breaks</p>
+            <p>{currentExcercise.reps} reps left</p>
+          </div>
+          <div className={styles.countdownContainer}>
+            <FontAwesomeIcon className={styles.timerIcon} icon={faStopwatch} />
+            <h2 className={styles.timerText}>{timer}</h2>
+          </div>
+        </div>
+      )}
+      )
     </div>
   );
 }
