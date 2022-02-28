@@ -44,8 +44,6 @@ export default function useWorkout() {
     e: React.ChangeEvent<HTMLInputElement>,
     idN: number
   ) {
-    console.log(e.target.value);
-    console.log(idN);
     setWorkout((prevWorkout) => {
       return prevWorkout.map((excercise) => {
         return excercise.idNumber === idN

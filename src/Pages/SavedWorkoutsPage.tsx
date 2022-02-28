@@ -1,7 +1,7 @@
 export default function SavedWorkoutPage() {
     return (
         <div>
-            <h1>workoutpage</h1>
+            <h1>saved workouts</h1>
         </div>
     )
 }

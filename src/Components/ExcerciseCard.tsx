@@ -72,6 +72,7 @@ export default function ExcerciseCard(props: Props) {
         </select>
         <br></br>
       </form>
+      <br></br>
     </div>
   );
 }

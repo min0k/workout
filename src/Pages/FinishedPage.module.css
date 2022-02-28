@@ -1,7 +1,5 @@
 .pageContainer {
-    display: flex;
-    border: 2px solid pink;
-    flex-direction: column;
+    composes: pageContainer from "../util/util.css";
 }
 
 .workoutCompleteContainer {
