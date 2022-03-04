@@ -1,4 +1,5 @@
 import styles from "./HomePage.module.css";
+import React from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRunning } from "@fortawesome/free-solid-svg-icons";
@@ -13,16 +14,18 @@ export default function HomePage() {
 
   let navigate = useNavigate();
 
-function goToHomePage() {
-  // const reshapedWorkout = reshapeWorkoutObject(workout);
-  navigate("/workout", {state: workout});
-}
+  function goToWorkoutPage() {
+    // const reshapedWorkout = reshapeWorkoutObject(workout);
+    //Use context or query params
+    navigate("/workout", { state: workout });
+  }
 
   return (
     <div className={styles.pageContainer}>
       <div className={styles.createWorkoutContainer}>
         {workout.map((e, idx) => {
           return (
+            // Pass all props as one whole thing
             <ExcerciseCard
               key={idx}
               idNumber={idx}
@@ -40,7 +43,7 @@ function goToHomePage() {
       </div>
       <div className={styles.startWorkoutContainer}>
         <FontAwesomeIcon className={styles.startIcon} icon={faRunning} />
-        <h2 onClick={goToHomePage} className={styles.startText}>
+        <h2 onClick={goToWorkoutPage} className={styles.startText}>
           Start
         </h2>
       </div>
