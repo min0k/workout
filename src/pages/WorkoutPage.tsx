@@ -4,7 +4,7 @@ import React from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStopwatch } from "@fortawesome/free-solid-svg-icons";
-import { useLocation, useNavigate, useNavigationType } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import IExcercise from "../Interface";
 
 export default function WorkoutPage() {
@@ -18,6 +18,18 @@ export default function WorkoutPage() {
   );
   const [timer, setTimer] = React.useState(currentExcercise.length);
   const [breakTime, setBreakTime] = React.useState<boolean>(false);
+
+  //fence posting for my if else statements
+  // const fakeSTate = [
+  //   {
+  //     reps: 4,
+  //   },
+  //   {
+  //     reps: 7,
+  //   },
+  // ];
+  // const reps = fakeSTate[excerciseNumber].reps;
+  // console.log("Seung", reps);
 
   React.useEffect(() => {
     const startTimer = setTimeout(() => {
@@ -76,7 +88,6 @@ export default function WorkoutPage() {
           </div>
         </div>
       )}
-      )
     </div>
   );
 }

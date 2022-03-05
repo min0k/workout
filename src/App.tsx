@@ -10,29 +10,27 @@ import Navbar from "./components/Navbar";
 import SavedWorkoutPage from "./pages/SavedWorkoutsPage";
 
 function App() {
+  // ---- Example object shape for workouts
 
-// ---- Example object shape for workouts
-
-// const tempObj = {
-//   excercise1: {
-//     type: "pushups",
-//     reps: 5,
-//     break_duration: 10,
-//     break_after_done: 60
-//   },
-//     excercise2: {
-//     type: "pullups",
-//     reps: 10,
-//     break_duration: 60,
-//     break_after_done: 1000
-//   }
-// }
-
+  // const tempObj = {
+  //   excercise1: {
+  //     type: "pushups",
+  //     reps: 5,
+  //     break_duration: 10,
+  //     break_after_done: 60
+  //   },
+  //     excercise2: {
+  //     type: "pullups",
+  //     reps: 10,
+  //     break_duration: 60,
+  //     break_after_done: 1000
+  //   }
+  // }
 
   return (
     <div className="app">
       <BrowserRouter>
-      <Navbar />
+        <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/workout" element={<WorkoutPage />} />

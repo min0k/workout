@@ -1,31 +1,34 @@
 import React from "react";
 import IExcercise from "../Interface";
 
+const DEFAULT_WORKOUT = {
+  idNumber: 0,
+  excercise: "squats",
+  length: 15,
+  reps: 2,
+  rep_break: 5,
+  excercise_break: 30,
+};
+
 export default function useWorkout() {
-  const [workout, setWorkout] = React.useState<IExcercise[]>([
-    {
-      idNumber: 0,
-      excercise: "squats",
-      length: 15,
-      reps: 2,
-      rep_break: 5,
-      excercise_break: 30,
-    },
-  ]);
+  const [workout, setWorkout] = React.useState<IExcercise[]>([DEFAULT_WORKOUT]);
 
   function addNewExcercise() {
-    setWorkout((prevValue) => [
-      ...prevValue,
-      {
-        idNumber: prevValue.length,
-        excercise: "squats",
-        length: 30,
-        reps: 2,
-        rep_break: 10,
-        excercise_break: 60,
-      },
-    ]);
+    setWorkout((prev) => [...prev, DEFAULT_WORKOUT]);
   }
+
+  // function handleSelectChange(
+  //   e: React.ChangeEvent<HTMLSelectElement>,
+  //   field: string,
+  //   value: number | string,
+  //   idNumber: number
+  // ) {
+  //   setWorkout((prev) => {
+  //     const clone = [...prev];
+  //     const itemIndex = clone.findIndex((ele) => ele.idNumber === idNumber);
+  //     clone[itemIndex][field] = value;
+  //     return clone;
+  //   });
 
   function handleSelectChange(
     e: React.ChangeEvent<HTMLSelectElement>,

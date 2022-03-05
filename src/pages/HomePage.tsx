@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRunning } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router";
 
+import { Link } from "react-router-dom";
+
 import ExcerciseCard from "../components/ExcerciseCard";
 import useWorkout from "../hooks/useWorkout";
 
@@ -15,7 +17,6 @@ export default function HomePage() {
   let navigate = useNavigate();
 
   function goToWorkoutPage() {
-    // const reshapedWorkout = reshapeWorkoutObject(workout);
     //Use context or query params
     navigate("/workout", { state: workout });
   }
@@ -43,9 +44,9 @@ export default function HomePage() {
       </div>
       <div className={styles.startWorkoutContainer}>
         <FontAwesomeIcon className={styles.startIcon} icon={faRunning} />
-        <h2 onClick={goToWorkoutPage} className={styles.startText}>
-          Start
-        </h2>
+        <Link to="/workout" state={workout} className={styles.startText}>
+          <h2>Start</h2>
+        </Link>
       </div>
     </div>
   );

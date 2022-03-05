@@ -22,3 +22,7 @@ img {
   display: block;
   /* Prevents images from being inline with other elements  */
 }
+
+a:visited {
+  color: black;
+}
