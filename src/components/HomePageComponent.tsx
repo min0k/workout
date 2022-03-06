@@ -1,14 +1,9 @@
-import styles from "./HomePage.module.css";
-import React from "react";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRunning } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router";
-
-import { createSearchParams, Link } from "react-router-dom";
 
 import ExcerciseCard from "../components/ExcerciseCard";
-import useWorkout from "../hooks/useWorkout";
+
+import styles from "./HomePageComponent.module.css";
 import IExcercise from "../Interface";
 
 interface IProps {
@@ -22,18 +17,18 @@ interface IProps {
     idN: number
   ) => void;
   addNewExcercise: () => void;
+  startWorkout: React.MouseEventHandler<HTMLHeadingElement>;
 }
 
-export default function HomePage({
+export default function HomePageComponent({
   workout,
   handleInputChange,
   handleSelectChange,
   addNewExcercise,
+  startWorkout,
 }: IProps) {
-  let navigate = useNavigate();
-
   return (
-    <div className={styles.pageContainer}>
+    <div>
       <div className={styles.createWorkoutContainer}>
         {workout.map((e, idx) => {
           return (
@@ -55,10 +50,7 @@ export default function HomePage({
       </div>
       <div className={styles.startWorkoutContainer}>
         <FontAwesomeIcon className={styles.startIcon} icon={faRunning} />
-        <h2
-          onClick={() => navigate("/workout", { state: workout })}
-          className={styles.startText}
-        >
+        <h2 onClick={startWorkout} className={styles.startText}>
           Start
         </h2>
       </div>

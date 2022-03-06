@@ -8,15 +8,24 @@ export default function Navbar() {
 
   return (
     <div className={styles.navbar}>
-      <h1 className={styles.h1} onClick={() => {navigate("/")}} >Workout<span className={styles.span}>!</span></h1>
+      <h1
+        className={styles.h1}
+        onClick={() => {
+          navigate("/");
+        }}
+      >
+        Workout<span className={styles.span}>!</span>
+      </h1>
       <nav>
         <ul className={styles.navbarLinks}>
-            <Link className={styles.navbarItems} to="/savedworkouts">Workouts</Link>
-            <Link className={styles.navbarItems} to="/about">About</Link>
-            <Link className={styles.navbarItems} to="/workoutdone">Finished</Link>
+          <Link className={styles.navbarItems} to="/savedworkouts">
+            Workouts
+          </Link>
+          <Link className={styles.navbarItems} to="/about">
+            About
+          </Link>
         </ul>
       </nav>
     </div>
   );
 }
-

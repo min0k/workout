@@ -1,7 +1,3 @@
-.pageContainer {
-  composes: pageContainer from "../util/util.css";
-}
-
 .createWorkoutContainer {
   display: flex;
   flex-direction: column;
@@ -24,10 +20,6 @@
 }
 
 @media (min-width: 800px) {
-  .pageContainer {
-    flex-direction: row;
-  }
-
   .createWorkoutContainer {
     flex: 60%;
   }

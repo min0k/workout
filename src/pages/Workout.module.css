@@ -1,0 +1,39 @@
+.pageContainer {
+  composes: pageContainer from "../util/util.css";
+}
+
+.workoutContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.countdownContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timerIcon {
+  font-size: clamp(12rem, 10.4rem + 8vw, 20rem);
+}
+
+.timerText {
+  font-size: clamp(3rem, 2.4rem + 3vw, 6rem);
+}
+
+@media (min-width: 800px) {
+  .pageContainer {
+    flex-direction: row;
+  }
+
+  .workoutContainer {
+    flex: 60%;
+  }
+
+  .countdownContainer {
+    flex: 40%;
+  }
+}
