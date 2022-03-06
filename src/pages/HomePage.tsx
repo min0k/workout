@@ -5,21 +5,32 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRunning } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router";
 
-import { Link } from "react-router-dom";
+import { createSearchParams, Link } from "react-router-dom";
 
 import ExcerciseCard from "../components/ExcerciseCard";
 import useWorkout from "../hooks/useWorkout";
+import IExcercise from "../Interface";
 
-export default function HomePage() {
-  const { workout, handleInputChange, handleSelectChange, addNewExcercise } =
-    useWorkout();
+interface IProps {
+  workout: IExcercise[];
+  handleInputChange: (
+    e: React.ChangeEvent<HTMLInputElement>,
+    idN: number
+  ) => void;
+  handleSelectChange: (
+    e: React.ChangeEvent<HTMLSelectElement>,
+    idN: number
+  ) => void;
+  addNewExcercise: () => void;
+}
 
+export default function HomePage({
+  workout,
+  handleInputChange,
+  handleSelectChange,
+  addNewExcercise,
+}: IProps) {
   let navigate = useNavigate();
-
-  function goToWorkoutPage() {
-    //Use context or query params
-    navigate("/workout", { state: workout });
-  }
 
   return (
     <div className={styles.pageContainer}>
@@ -44,9 +55,12 @@ export default function HomePage() {
       </div>
       <div className={styles.startWorkoutContainer}>
         <FontAwesomeIcon className={styles.startIcon} icon={faRunning} />
-        <Link to="/workout" state={workout} className={styles.startText}>
-          <h2>Start</h2>
-        </Link>
+        <h2
+          onClick={() => navigate("/workout", { state: workout })}
+          className={styles.startText}
+        >
+          Start
+        </h2>
       </div>
     </div>
   );

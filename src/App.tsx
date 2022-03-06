@@ -9,35 +9,43 @@ import AboutPage from "./pages/AboutPage";
 import Navbar from "./components/Navbar";
 import SavedWorkoutPage from "./pages/SavedWorkoutsPage";
 
-function App() {
-  // ---- Example object shape for workouts
+import useWorkout from "./hooks/useWorkout";
 
-  // const tempObj = {
-  //   excercise1: {
-  //     type: "pushups",
-  //     reps: 5,
-  //     break_duration: 10,
-  //     break_after_done: 60
-  //   },
-  //     excercise2: {
-  //     type: "pullups",
-  //     reps: 10,
-  //     break_duration: 60,
-  //     break_after_done: 1000
-  //   }
-  // }
+function App() {
+  const { workout, handleInputChange, handleSelectChange, addNewExcercise } =
+    useWorkout();
 
   return (
     <div className="app">
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/workout" element={<WorkoutPage />} />
+          <Route
+            path="/"
+            element={
+              <HomePage
+                workout={workout}
+                handleInputChange={handleInputChange}
+                handleSelectChange={handleSelectChange}
+                addNewExcercise={addNewExcercise}
+              />
+            }
+          />
+          <Route path="/workout/" element={<WorkoutPage workout={workout} />} />
           <Route path="/workoutdone" element={<FinishedPage />} />
           <Route path="/savedworkouts" element={<SavedWorkoutPage />} />
           <Route path="/about" element={<AboutPage />} />
-          <Route path="*" element={<HomePage />} />
+          <Route
+            path="*"
+            element={
+              <HomePage
+                workout={workout}
+                handleInputChange={handleInputChange}
+                handleSelectChange={handleSelectChange}
+                addNewExcercise={addNewExcercise}
+              />
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>
